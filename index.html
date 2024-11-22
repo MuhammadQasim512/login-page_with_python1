@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Users</title>
+</head>
+<body>
+   
+    <h2 align="center">Login Page</h2>
+    <form method="POST" align = "center">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br> <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <label for="Email">Email:</label>
+        <input type="text" id="Email" name="Email" required>
+        <br> <br>
+        <button type="submit">Submit</button>
+    </form>
+    <h1 align = "center">Users</h1>
+    <table border="1" align="center">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>   
+            <th>password</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2]}}</td>
+            <td>{{ user[3] }}</td>
+            <td>
+                <form action="{{ url_for('delete_user', user_id=user[0]) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="{{ url_for('edit_user', user_id=user[0]) }}">
+                    <button>Edit</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
